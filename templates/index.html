@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduate Library</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen">
+
+    <header class="bg-indigo-700 text-white shadow-lg">
+        <div class="max-w-4xl mx-auto px-4 py-6">
+            <h1 class="text-2xl font-bold">Graduate Library</h1>
+            <p class="text-indigo-200">Book registration for graduated students</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="mb-4 px-4 py-3 rounded-lg text-sm font-medium
+                        {% if category == 'error' %}bg-red-100 text-red-700 border border-red-300{% else %}bg-green-100 text-green-700 border border-green-300{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <section class="bg-white rounded-xl shadow p-6 mb-8">
+            <h2 class="text-lg font-semibold text-slate-800 mb-4">Register a Book</h2>
+            <form method="post" action="{{ url_for('add_student') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="full_name">Full Name</label>
+                    <input type="text" name="full_name" id="full_name" required placeholder="e.g. Ahmed Ali"
+                        class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="phone">Phone</label>
+                    <input type="tel" name="phone" id="phone" required placeholder="e.g. 0770 123 4567"
+                        class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="semester">Semester</label>
+                    <input type="text" name="semester" id="semester" required placeholder="e.g. 1st / 2nd / 3rd"
+                        class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="faculty">Faculty</label>
+                    <input type="text" name="faculty" id="faculty" required placeholder="e.g. Computer Science"
+                        class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-slate-700 mb-1" for="book">Book</label>
+                    <input type="text" name="book" id="book" required placeholder="e.g. Introduction to Algorithms"
+                        class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </div>
+                <div class="md:col-span-2">
+                    <button type="submit"
+                        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+                        Save Record
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <section class="bg-white rounded-xl shadow p-6">
+            <h2 class="text-lg font-semibold text-slate-800 mb-4">Registered Books ({{ students|length }})</h2>
+            {% if students %}
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-slate-700">
+                        <thead class="text-xs uppercase bg-slate-50 text-slate-500">
+                            <tr>
+                                <th class="px-4 py-3">Full Name</th>
+                                <th class="px-4 py-3">Phone</th>
+                                <th class="px-4 py-3">Semester</th>
+                                <th class="px-4 py-3">Faculty</th>
+                                <th class="px-4 py-3">Book</th>
+                                <th class="px-4 py-3">Date</th>
+                                <th class="px-4 py-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            {% for student in students %}
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-3 font-medium">{{ student['full_name'] }}</td>
+                                <td class="px-4 py-3">{{ student['phone'] }}</td>
+                                <td class="px-4 py-3">{{ student['semester'] }}</td>
+                                <td class="px-4 py-3">{{ student['faculty'] }}</td>
+                                <td class="px-4 py-3">{{ student['book'] }}</td>
+                                <td class="px-4 py-3">{{ student['created_at'] }}</td>
+                                <td class="px-4 py-3">
+                                    <form method="post" action="{{ url_for('delete_student', student_id=student['id']) }}"
+                                          onsubmit="return confirm('Delete this record?');">
+                                        <button type="submit"
+                                            class="text-red-600 hover:text-red-800 font-medium">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="text-slate-500 text-sm">No records yet. Register the first book above.</p>
+            {% endif %}
+        </section>
+
+    </main>
+
+</body>
+</html>
