@@ -1,16 +1,18 @@
 import os
+from dotenv import load_dotenv
 from supabase import create_client, Client
 from flask import Flask, render_template, request, redirect, url_for, flash
 
-app = Flask(__name__)
-app.secret_key = "library-app-secret"
+load_dotenv()
 
-SUPABASE_URL = "https://xrfrftilofzbbvlxtcsr.supabase.co"
-SUPABASE_KEY = (
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9."
-    "eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhyZnJmdGlsb2Z6YmJ2bHh0Y3NyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzNTk2NDAsImV4cCI6MjEwMTkzNTY0MH0."
-    "LrnEansT_Py_0E_-0bB7HhGzYp0wJmss42uSIl0vpyk"
-)
+app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", "library-app-secret")
+
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise RuntimeError("Missing SUPABASE_URL or SUPABASE_KEY environment variables")
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 
