@@ -9,14 +9,14 @@
 <body class="min-h-screen font-bold bg-gradient-to-br from-emerald-50 via-slate-100 to-slate-200">
 
     <header class="bg-gradient-to-r from-green-800 via-green-700 to-emerald-600 text-white shadow-2xl">
-        <div class="max-w-5xl mx-auto px-4 py-8 text-center relative">
-            <img src="https://static.vecteezy.com/system/resources/thumbnails/004/297/596/small_2x/education-logo-open-book-dictionary-textbook-or-notebook-with-sunrice-icon-modern-emblem-idea-concept-design-for-business-libraries-schools-universities-educational-courses-vector.jpg" alt="Graduate Library logo" class="w-14 h-14 mx-auto mb-3 rounded-full bg-white shadow-lg object-cover">
-            <h1 class="text-3xl font-extrabold tracking-wide">Graduate Library</h1>
+        <div class="max-w-5xl mx-auto px-4 py-6 text-center relative">
+            <img src="https://static.vecteezy.com/system/resources/thumbnails/004/297/596/small_2x/education-logo-open-book-dictionary-textbook-or-notebook-with-sunrice-icon-modern-emblem-idea-concept-design-for-business-libraries-schools-universities-educational-courses-vector.jpg" alt="Graduate Library logo" class="w-16 h-16 mx-auto mb-3 rounded-full bg-white shadow-lg object-cover">
+            <h1 class="text-2xl font-extrabold tracking-wide">Graduate Library</h1>
             <p class="text-green-200 mt-1">Book registration for graduated students</p>
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto px-4 py-8">
+    <main class="max-w-5xl mx-auto px-4 py-6">
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
@@ -29,9 +29,9 @@
             {% endif %}
         {% endwith %}
 
-        <section class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-slate-200 p-6 mb-8 hover:shadow-2xl transition-shadow">
-            <h2 class="text-xl font-extrabold text-slate-800 mb-5 flex items-center gap-2">
-                <span class="w-8 h-8 rounded-lg bg-green-700 text-white flex items-center justify-center text-sm">+</span>
+        <section class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-slate-200 p-5 mb-6 hover:shadow-2xl transition-shadow">
+            <h2 class="text-lg font-extrabold text-slate-800 mb-4 flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-green-700 text-white flex items-center justify-center text-sm">+</span>
                 Register a Book
             </h2>
             <form method="post" action="{{ url_for('add_student') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -86,9 +86,9 @@
             </form>
         </section>
 
-        <section class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-slate-200 p-6 hover:shadow-2xl transition-shadow">
-            <h2 class="text-xl font-extrabold text-slate-800 mb-5 flex items-center gap-2">
-                <span class="w-8 h-8 rounded-lg bg-green-700 text-white flex items-center justify-center text-sm">&#9806;</span>
+        <section class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-slate-200 p-5 hover:shadow-2xl transition-shadow">
+            <h2 class="text-lg font-extrabold text-slate-800 mb-4 flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-green-700 text-white flex items-center justify-center text-sm">&#9806;</span>
                 Registered Books ({{ students|length }})
             </h2>
             {% if students %}
@@ -133,7 +133,7 @@
 
     </main>
 
-    <footer class="text-center text-slate-400 text-xs py-6 pb-10">Graduate Library &copy; 2026</footer>
+    <footer class="text-center text-slate-400 text-xs py-4">Graduate Library &copy; 2026</footer>
 
 </body>
 </html>
