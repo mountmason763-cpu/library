@@ -6,48 +6,51 @@
     <title>Graduate Library</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-100 min-h-screen font-bold">
+<body class="min-h-screen font-bold bg-gradient-to-br from-emerald-50 via-slate-100 to-slate-200">
 
-    <header class="bg-green-700 text-white shadow-lg">
-        <div class="max-w-4xl mx-auto px-4 py-6 text-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="Graduate Library logo">
+    <header class="bg-gradient-to-r from-green-800 via-green-700 to-emerald-600 text-white shadow-2xl">
+        <div class="max-w-5xl mx-auto px-4 py-8 text-center relative">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 mx-auto mb-3 drop-shadow-lg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-label="Graduate Library logo">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
-            <h1 class="text-2xl font-bold">Graduate Library</h1>
-            <p class="text-green-200">Book registration for graduated students</p>
+            <h1 class="text-3xl font-extrabold tracking-wide">Graduate Library</h1>
+            <p class="text-green-200 mt-1">Book registration for graduated students</p>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-8">
+    <main class="max-w-5xl mx-auto px-4 py-8">
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="mb-4 px-4 py-3 rounded-lg text-sm font-bold
-                        {% if category == 'error' %}bg-red-100 text-red-700 border border-red-300{% else %}bg-green-100 text-green-700 border border-green-300{% endif %}">
+                    <div class="mb-4 px-4 py-3 rounded-xl text-sm font-bold shadow-sm
+                        {% if category == 'error' %}bg-red-100 text-red-700 border-l-4 border-red-500{% else %}bg-green-100 text-green-700 border-l-4 border-green-500{% endif %}">
                         {{ message }}
                     </div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
 
-        <section class="bg-white rounded-xl shadow p-6 mb-8">
-            <h2 class="text-lg font-bold text-slate-800 mb-4">Register a Book</h2>
+        <section class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-slate-200 p-6 mb-8 hover:shadow-2xl transition-shadow">
+            <h2 class="text-xl font-extrabold text-slate-800 mb-5 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-green-700 text-white flex items-center justify-center text-sm">+</span>
+                Register a Book
+            </h2>
             <form method="post" action="{{ url_for('add_student') }}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-1" for="full_name">Full Name</label>
                     <input type="text" name="full_name" id="full_name" required placeholder="e.g. Ahmed Ali"
-                        class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        class="w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white transition">
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-1" for="phone">Phone</label>
                     <input type="tel" name="phone" id="phone" required placeholder="e.g. 0770 123 4567"
-                        class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        class="w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white transition">
                 </div>
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-1" for="semester">Semester</label>
                     <select name="semester" id="semester" required
-                        class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        class="w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white transition">
                         <option value="" disabled selected>Select semester</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -63,7 +66,7 @@
                 <div>
                     <label class="block text-sm font-bold text-slate-700 mb-1" for="faculty">Faculty</label>
                     <select name="faculty" id="faculty" required
-                        class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        class="w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white transition">
                         <option value="" disabled selected>Select faculty</option>
                         <option value="IT">IT</option>
                         <option value="BBA">BBA</option>
@@ -74,23 +77,26 @@
                 <div class="md:col-span-2">
                     <label class="block text-sm font-bold text-slate-700 mb-1" for="book">Book</label>
                     <input type="text" name="book" id="book" required placeholder="e.g. Introduction to Algorithms"
-                        class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        class="w-full rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 focus:bg-white transition">
                 </div>
                 <div class="md:col-span-2">
                     <button type="submit"
-                        class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded-lg transition">
+                        class="w-full bg-gradient-to-r from-green-700 to-emerald-600 hover:from-green-800 hover:to-emerald-700 text-white font-extrabold py-3 px-4 rounded-xl shadow-lg hover:shadow-xl transition active:scale-[0.99]">
                         Save Record
                     </button>
                 </div>
             </form>
         </section>
 
-        <section class="bg-white rounded-xl shadow p-6">
-            <h2 class="text-lg font-bold text-slate-800 mb-4">Registered Books ({{ students|length }})</h2>
+        <section class="bg-white/90 backdrop-blur rounded-2xl shadow-xl border border-slate-200 p-6 hover:shadow-2xl transition-shadow">
+            <h2 class="text-xl font-extrabold text-slate-800 mb-5 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-green-700 text-white flex items-center justify-center text-sm">&#9806;</span>
+                Registered Books ({{ students|length }})
+            </h2>
             {% if students %}
-                <div class="overflow-x-auto">
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
                     <table class="w-full text-sm text-left text-slate-700">
-                        <thead class="text-xs uppercase bg-slate-50 text-slate-500">
+                        <thead class="text-xs uppercase bg-slate-100 text-slate-600">
                             <tr>
                                 <th class="px-4 py-3">Full Name</th>
                                 <th class="px-4 py-3">Phone</th>
@@ -101,20 +107,20 @@
                                 <th class="px-4 py-3">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-200">
+                        <tbody class="divide-y divide-slate-200 bg-white">
                             {% for student in students %}
-                            <tr class="hover:bg-slate-50">
-                                <td class="px-4 py-3 font-bold">{{ student['full_name'] }}</td>
+                            <tr class="hover:bg-green-50 transition-colors">
+                                <td class="px-4 py-3 font-bold text-slate-800">{{ student['full_name'] }}</td>
                                 <td class="px-4 py-3">{{ student['phone'] }}</td>
-                                <td class="px-4 py-3">{{ student['semester'] }}</td>
-                                <td class="px-4 py-3">{{ student['faculty'] }}</td>
-                                <td class="px-4 py-3">{{ student['book'] }}</td>
-                                <td class="px-4 py-3">{{ student['created_at'] }}</td>
+                                <td class="px-4 py-3"><span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold">{{ student['semester'] }}</span></td>
+                                <td class="px-4 py-3"><span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">{{ student['faculty'] }}</span></td>
+                                <td class="px-4 py-3 font-bold text-slate-800">{{ student['book'] }}</td>
+                                <td class="px-4 py-3 text-xs text-slate-500">{{ student['created_at'] }}</td>
                                 <td class="px-4 py-3">
                                     <form method="post" action="{{ url_for('delete_student', student_id=student['id']) }}"
                                           onsubmit="return confirm('Delete this record?');">
                                         <button type="submit"
-                                            class="text-red-600 hover:text-red-800 font-bold">Delete</button>
+                                            class="px-3 py-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-600 hover:text-white font-bold transition">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -123,11 +129,13 @@
                     </table>
                 </div>
             {% else %}
-                <p class="text-slate-500 text-sm">No records yet. Register the first book above.</p>
+                <p class="text-slate-500 text-sm py-4">No records yet. Register the first book above.</p>
             {% endif %}
         </section>
 
     </main>
+
+    <footer class="text-center text-slate-400 text-xs py-6 pb-10">Graduate Library &copy; 2026</footer>
 
 </body>
 </html>
